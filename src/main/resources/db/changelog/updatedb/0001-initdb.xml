@@ -41,10 +41,10 @@
             <constraints foreignKeyName="fk_photos_customers" referencedTableName="customers" referencedColumnNames="customer_id"/>
         </column>
     </createTable>
-    <createIndex tableName="photos" indexName="idx_session_id">
+    <createIndex tableName="photos" indexName="idx_photos_session_id">
         <column name="session_id"></column>
     </createIndex>
-    <createIndex tableName="photos" indexName="idx_customer_id">
+    <createIndex tableName="photos" indexName="idx_photos_customer_id">
         <column name="customer_id"></column>
     </createIndex>
 </changeSet>

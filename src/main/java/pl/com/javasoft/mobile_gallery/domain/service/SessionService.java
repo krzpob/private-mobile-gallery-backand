@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,7 @@ public class SessionService {
     public List<Session> getSessionsByCustomerId(Integer id){
         Optional<Customer> customer = customerRepository.findById(id);
         if(customer.isEmpty()){
-            throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null)
+            throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null);
         }
 
         return sessionRepository.findByCustomer(customer.get());
@@ -32,8 +31,8 @@ public class SessionService {
     public Session create(Integer id,CreateSessionCommand createSessionCommand) {
         Optional<Customer> customer = customerRepository.findById(id);
         if(customer.isEmpty()){
-            throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null)
+            throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null);
         }
-        sessionRepository.save(new Session(createSessionCommand.getName(), createSessionCommand.getSessDateTime(), customer.get()));
+        return sessionRepository.save(new Session(createSessionCommand.getName(), createSessionCommand.getSessDateTime(), customer.get()));
     }
 }

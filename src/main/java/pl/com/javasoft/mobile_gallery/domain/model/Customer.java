@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.util.DigestUtils;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,13 +45,17 @@ public class Customer {
     }
 
     public boolean checkPassword(String password){
-        return this.password.equals(password);
+        return this.password.equals(encodePassword(password));
     }
 
     
 
     public Customer(String email,String  password){
         this.email=email;
-        this.password=password;
+        this.password=encodePassword(password);
+    }
+
+    private String encodePassword(String password){
+        return DigestUtils.md5DigestAsHex(password.getBytes());
     }
 }

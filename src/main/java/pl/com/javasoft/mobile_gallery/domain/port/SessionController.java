@@ -30,7 +30,7 @@ public class SessionController {
     @PostMapping("/customer/{id}/sessions")
     public Session postMethodName(@PathVariable Integer id,@RequestBody CreateSessionCommand createSessionCommand) {
         
-        return sessionService.create(createSessionCommand);;
+        return sessionService.create(id,createSessionCommand);
     }
     
     

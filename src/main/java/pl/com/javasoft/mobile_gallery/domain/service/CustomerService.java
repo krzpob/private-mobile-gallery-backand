@@ -17,7 +17,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     
     public Customer addCustomer(String email, String password){
-        var customer = new Customer(email,  DigestUtils.md5DigestAsHex(password.getBytes()));
+        var customer = new Customer(email,  password);
         return customerRepository.save(customer);
     }
 
