@@ -9,10 +9,12 @@ import pl.com.javasoft.mobile_gallery.domain.service.SessionService;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 
@@ -27,6 +29,7 @@ public class SessionController {
         return sessionService.getSessionsByCustomerId(id);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/customer/{id}/sessions")
     public Session postMethodName(@PathVariable Integer id,@RequestBody CreateSessionCommand createSessionCommand) {
         
