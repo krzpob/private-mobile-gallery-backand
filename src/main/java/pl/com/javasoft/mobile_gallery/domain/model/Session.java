@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +23,7 @@ import lombok.Getter;
 @Table(name = "sessions")
 public class Session {
     @Id
+    @Getter
     @Column(name = "session_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,18 +37,25 @@ public class Session {
     private LocalDateTime sessionDate;
 
     @Getter
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="customer_id", nullable=false)
     private Customer customer;
 
+    @Getter
     @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE)
     private Set<Photo> photos = new HashSet<>();
     
+    public Integer getCustomerId(){
+        return customer.getId();
+    }
 
     public Session(String name, LocalDateTime sessionDate, Customer customer){
         this.customer=customer;
         this.sessionDate=sessionDate;
         this.name=name;
-    }    
+    }  
+    
+    protected Session(){}
     
 }

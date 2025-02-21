@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientResponseException;
 
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import pl.com.javasoft.mobile_gallery.domain.port.dto.CreateSessionCommand;
 import pl.com.javasoft.mobile_gallery.domain.repository.CustomerRepository;
 import pl.com.javasoft.mobile_gallery.domain.repository.SessionRepository;
 
+@Service
 @RequiredArgsConstructor
 public class SessionService {
     private final CustomerRepository customerRepository;
@@ -34,5 +36,14 @@ public class SessionService {
             throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null);
         }
         return sessionRepository.save(new Session(createSessionCommand.getName(), createSessionCommand.getSessDateTime(), customer.get()));
+    }
+
+    public Session getSession(Long id) {
+        var result = sessionRepository.findById(id);
+        if(result.isPresent()){
+            return result.get();
+        } else {
+            throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null);
+        }
     }
 }

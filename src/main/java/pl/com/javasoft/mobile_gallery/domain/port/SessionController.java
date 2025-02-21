@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import pl.com.javasoft.mobile_gallery.domain.model.Session;
+import pl.com.javasoft.mobile_gallery.domain.port.dto.BasicPhoto;
 import pl.com.javasoft.mobile_gallery.domain.port.dto.CreateSessionCommand;
+import pl.com.javasoft.mobile_gallery.domain.port.dto.SessionDTO;
 import pl.com.javasoft.mobile_gallery.domain.service.SessionService;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 
+
 @RestController
 @RequiredArgsConstructor
 public class SessionController {
@@ -25,8 +28,14 @@ public class SessionController {
     private final SessionService sessionService;
 
     @GetMapping("/customer/{id}/sessions")
-    public List<Session> findCustomerSessions(@PathVariable Integer id){
-        return sessionService.getSessionsByCustomerId(id);
+    public List<SessionDTO> findCustomerSessions(@PathVariable Integer id){
+        return sessionService.getSessionsByCustomerId(id).stream().map(
+            session->SessionDTO.builder()
+            .withId(session.getId())
+            .withName(session.getName())
+            .withSessionDate(session.getSessionDate())
+            .build()
+            ).toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -35,6 +44,20 @@ public class SessionController {
         
         return sessionService.create(id,createSessionCommand);
     }
+
+    @GetMapping("/sessions/{id}")
+    public SessionDTO getSession(@PathVariable Long id) {
+        var session = sessionService.getSession(id);
+        return SessionDTO.builder()
+            .withId(session.getId())
+            .withName(session.getName())
+            .withPhotos(session.getPhotos().stream().map(
+                photo-> new BasicPhoto(photo.getId(),photo.isFavorit(),photo.getSessionId())
+            ).toList())
+            .withSessionDate(session.getSessionDate())
+            .build();
+    }
+    
     
     
 }

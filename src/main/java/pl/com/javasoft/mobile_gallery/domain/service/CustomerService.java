@@ -31,4 +31,8 @@ public class CustomerService {
         }
         customerRepository.deleteById(id);
     }
+
+    public Optional<Customer> findOneById(Integer id){
+        return customerRepository.findById(id);
+    }
 }

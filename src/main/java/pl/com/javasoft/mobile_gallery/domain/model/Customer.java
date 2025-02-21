@@ -9,6 +9,7 @@ import org.springframework.util.DigestUtils;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +30,7 @@ public class Customer {
     private String password;
 
     
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Session> sessions = new ArrayList<>();
 
     public List<Session> getSessions(){
@@ -49,6 +50,9 @@ public class Customer {
     }
 
     
+    protected Customer(){
+
+    }
 
     public Customer(String email,String  password){
         this.email=email;
