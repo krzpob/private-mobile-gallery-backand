@@ -32,8 +32,6 @@ public class CustomerController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public Customer postMethodName(@RequestBody CustomerCreateCommand customerCommand) {
-        //TODO: process POST request
-        
         return customerService.addCustomer(customerCommand.getEmail(),customerCommand.getPassword());
     }
 

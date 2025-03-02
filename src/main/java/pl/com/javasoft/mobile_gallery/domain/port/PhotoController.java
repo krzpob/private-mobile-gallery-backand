@@ -9,6 +9,7 @@ import pl.com.javasoft.mobile_gallery.domain.port.dto.BasicPhoto;
 import pl.com.javasoft.mobile_gallery.domain.service.PhotoService;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,7 @@ public class PhotoController {
     }
 
     @GetMapping("/photos/{id}")
-    public ResponseEntity<BasicPhoto> getPhoto(@PathVariable Long id){
+    public ResponseEntity<BasicPhoto> getPhoto(@PathVariable Long id, Principal usePrincipal){
         Optional<Photo> optPhoto = photoService.getPhoto(id);
         if(optPhoto.isEmpty()){
             return ResponseEntity.notFound().build();
