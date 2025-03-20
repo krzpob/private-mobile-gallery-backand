@@ -9,7 +9,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 <changeSet id="create-table-customers" author="krzpob@gmail.com">
     <createTable tableName="customers">
-        <column name="customer_id" type="int" autoIncrement="true">
+        <column name="customer_id" type="BIGINT" autoIncrement="true">
             <constraints primaryKey="true" nullable="false" />
         </column>
         <column name="email" type="varchar(255)"></column>
@@ -23,7 +23,7 @@
         </column>
         <column name="session_name" type="varchar(256)"></column>
         <column name="session_date" type="timestamp"></column>
-        <column name="customer_id" type="INT">
+        <column name="customer_id" type="BIGINT">
             <constraints foreignKeyName="fk_session_customers" referencedTableName="customers" referencedColumnNames="customer_id"/>
         </column>
     </createTable>
@@ -37,7 +37,7 @@
         <column name="session_id" type="BIGINT">
             <constraints foreignKeyName="fk_photos_session" referencedTableName="sessions" referencedColumnNames="session_id"/>
         </column>
-        <column name="customer_id" type="INT">
+        <column name="customer_id" type="BIGINT">
             <constraints foreignKeyName="fk_photos_customers" referencedTableName="customers" referencedColumnNames="customer_id"/>
         </column>
     </createTable>

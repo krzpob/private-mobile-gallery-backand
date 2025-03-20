@@ -46,7 +46,7 @@ public class Session {
     @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE)
     private Set<Photo> photos = new HashSet<>();
     
-    public Integer getCustomerId(){
+    public Long getCustomerId(){
         return customer.getId();
     }
 

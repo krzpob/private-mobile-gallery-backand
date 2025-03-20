@@ -13,21 +13,20 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
+@PrimaryKeyJoinColumn
 @Table(name = "customers")
-public class Customer {
+public class Customer extends User  {
     
-    @Id
-    @Column(name = "customer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String email;
-     
-    private String password;
+    @ManyToOne()
+    @JoinColumn(name = "photographer_id")
+    private Photographer photographer;
 
     
     @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
@@ -36,30 +35,17 @@ public class Customer {
     public List<Session> getSessions(){
         return Collections.unmodifiableList(sessions);
     }
-    
-    public Integer getId(){
-        return id;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public boolean checkPassword(String password){
-        return this.password.equals(encodePassword(password));
-    }
 
     
     protected Customer(){
 
     }
 
-    public Customer(String email,String  password){
-        this.email=email;
-        this.password=encodePassword(password);
+    public Customer(String email, String password, Photographer photographer){
+        super(email, password);
+        this.photographer=photographer;
     }
 
-    private String encodePassword(String password){
-        return DigestUtils.md5DigestAsHex(password.getBytes());
-    }
+    
+    
 }

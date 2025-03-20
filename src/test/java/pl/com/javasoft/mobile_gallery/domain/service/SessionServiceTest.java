@@ -9,8 +9,10 @@ import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import pl.com.javasoft.mobile_gallery.domain.model.Photographer;
 import pl.com.javasoft.mobile_gallery.domain.port.dto.CreateSessionCommand;
 import pl.com.javasoft.mobile_gallery.domain.repository.CustomerRepository;
+import pl.com.javasoft.mobile_gallery.domain.repository.PhotographerRepository;
 import pl.com.javasoft.mobile_gallery.domain.repository.SessionRepository;
 
 @DataJpaTest()
@@ -22,19 +24,24 @@ public class SessionServiceTest {
     @Autowired
     private SessionRepository sessionRepository;
 
+    @Autowired
+    private PhotographerRepository photographerRepository;
+
     private SessionService sessionService;
     private CustomerService customerService;
 
     @BeforeEach
     void setup(){
         sessionService = new SessionService(customerRepository, sessionRepository);
-        customerService = new CustomerService(customerRepository);
+        customerService = new CustomerService(customerRepository, photographerRepository);
     }
 
     @Test
     void shouldCreateSessionForExistingCustomer() {
         //given
-        var customer = customerService.addCustomer("test@test.pl", "testtest1234");
+         var photographer = new Photographer("kontakt@example.com","password","www.example.com");
+        photographerRepository.saveAndFlush(photographer);
+        var customer = customerService.addCustomer("test@test.pl", "testtest1234",new MyUserPrincipal(photographer));
         //when
         sessionService.create(customer.getId(), new CreateSessionCommand("test", LocalDateTime.now()));
         //then

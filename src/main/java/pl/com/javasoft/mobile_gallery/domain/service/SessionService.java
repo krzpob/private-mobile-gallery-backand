@@ -20,7 +20,7 @@ public class SessionService {
     private final CustomerRepository customerRepository;
     private final SessionRepository sessionRepository;
     
-    public List<Session> getSessionsByCustomerId(Integer id){
+    public List<Session> getSessionsByCustomerId(Long id){
         Optional<Customer> customer = customerRepository.findById(id);
         if(customer.isEmpty()){
             throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null);
@@ -30,7 +30,7 @@ public class SessionService {
         
     }
 
-    public Session create(Integer id,CreateSessionCommand createSessionCommand) {
+    public Session create(Long id,CreateSessionCommand createSessionCommand) {
         Optional<Customer> customer = customerRepository.findById(id);
         if(customer.isEmpty()){
             throw new RestClientResponseException(null, HttpStatus.NOT_FOUND, null, null, null, null);

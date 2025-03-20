@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>	
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="drop_photograph_id_column" author="krzpob@gmail.com" failOnError="false">
+    <dropColumn tableName="customers"><column name="photograph_id"></column></dropColumn>
+    <dropForeignKeyConstraint baseTableName="customers" constraintName="fk_photographer" />
+</changeSet>
+<changeSet id="add_unique_customer_user_id" author="krzpob@gmail.com">
+    <addUniqueConstraint tableName="customers" columnNames="user_id"></addUniqueConstraint>
+</changeSet>
+<changeSet id="add_unique_photographers_user_id" author="krzpob@gmail.com">
+    <addUniqueConstraint tableName="photographers" columnNames="user_id"></addUniqueConstraint>
+</changeSet>
+<changeSet id="add_fk_photographer_id" author="krzpob@gmail.com" failOnError="false" >
+    <addForeignKeyConstraint baseTableName="customers" baseColumnNames="photographer_id" constraintName="fk_photographer" referencedTableName="photographers" referencedColumnNames="user_id" />
+</changeSet>
+</databaseChangeLog>

@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import pl.com.javasoft.mobile_gallery.domain.model.Photographer;
 import pl.com.javasoft.mobile_gallery.domain.repository.CustomerRepository;
+import pl.com.javasoft.mobile_gallery.domain.repository.PhotographerRepository;
 
 @DataJpaTest()
 public class CustomerServiceTest {
@@ -14,18 +16,25 @@ public class CustomerServiceTest {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private PhotographerRepository photographerRepository;
+
     
     private CustomerService service;
 
     @BeforeEach
     void setup(){
-        service = new CustomerService(customerRepository);
+        service = new CustomerService(customerRepository, photographerRepository);
     }
 
     @Test
     void shouldAddCustomer(){
-        var customer = service.addCustomer("test@test.pl", "test");
-        BDDAssertions.then(customer.checkPassword("test")).isTrue();
+
+        var photographer = new Photographer("kontakt@example.com","password","www.example.com");
+        photographerRepository.saveAndFlush(photographer);
+        var customer = service.addCustomer("test@test.pl", "test", new MyUserPrincipal(photographer));
+        BDDAssertions.then(customer.getEmail()).isEqualTo("test@test.pl");
+        
     }
 
 }
