@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import jakarta.transaction.Transactional;
 import pl.com.javasoft.mobile_gallery.domain.model.Photographer;
 import pl.com.javasoft.mobile_gallery.domain.repository.CustomerRepository;
 import pl.com.javasoft.mobile_gallery.domain.repository.PhotographerRepository;
@@ -28,6 +29,7 @@ public class CustomerServiceTest {
     }
 
     @Test
+    @Transactional
     void shouldAddCustomer(){
 
         var photographer = new Photographer("kontakt@example.com","password","www.example.com");

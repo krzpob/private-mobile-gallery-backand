@@ -17,6 +17,17 @@
 <changeSet id="add_unique_photographers_user_id" author="krzpob@gmail.com">
     <addUniqueConstraint tableName="photographers" columnNames="user_id"></addUniqueConstraint>
 </changeSet>
+<<<<<<< HEAD
+=======
+<changeSet id="add_photographer_id" author="krzpob@gmail.com">
+    <preConditions onFail="WARN">
+          <not>
+            <columnExists tableName="customers" columnName="photographer_id" />
+          </not>
+        </preConditions>
+    <addColumn tableName="customers" ><column name="photographer_id" type="BIGINT" ></column></addColumn>
+</changeSet>
+>>>>>>> fb928c0 (add some logic)
 <changeSet id="add_fk_photographer_id" author="krzpob@gmail.com" failOnError="false" >
     <addForeignKeyConstraint baseTableName="customers" baseColumnNames="photographer_id" constraintName="fk_photographer" referencedTableName="photographers" referencedColumnNames="user_id" />
 </changeSet>
