@@ -1,4 +1,4 @@
-package pl.com.javasoft.mobile_gallery.infrastructure;
+package pl.com.javasoft.mobile_gallery.infrastructure.config;
 
 import java.util.HashMap;
 import java.util.Map;
