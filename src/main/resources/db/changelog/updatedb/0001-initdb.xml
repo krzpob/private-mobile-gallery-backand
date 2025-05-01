@@ -7,45 +7,13 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-<changeSet id="create-table-customers" author="krzpob@gmail.com">
-    <createTable tableName="customers">
-        <column name="customer_id" type="BIGINT" autoIncrement="true">
-            <constraints primaryKey="true" nullable="false" />
-        </column>
-        <column name="email" type="varchar(255)"></column>
-        <column name="password" type="varchar(1024)"></column>
-    </createTable>
-</changeSet>      
-<changeSet id="create-table-sessions" author="krzpob@gmail.com">
-    <createTable tableName="sessions">
-        <column name="session_id" autoIncrement="true" type="BIGINT">
-            <constraints primaryKey="true" nullable="false" />
-        </column>
-        <column name="session_name" type="varchar(256)"></column>
-        <column name="session_date" type="timestamp"></column>
-        <column name="customer_id" type="BIGINT">
-            <constraints foreignKeyName="fk_session_customers" referencedTableName="customers" referencedColumnNames="customer_id"/>
-        </column>
-    </createTable>
-    <createIndex tableName="sessions" indexName="idx_customer_id"><column name="customer_id"></column></createIndex>
-</changeSet>  
-<changeSet id="create-table-photos" author="krzpob@gmail.com">
-    <createTable tableName="photos">
-        <column name="photo_id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true" nullable="false" /></column>
-        <column name="image" type="LONGTEXT"></column>
-        <column name="favorit" type="boolean" defaultValueBoolean="false"></column>
-        <column name="session_id" type="BIGINT">
-            <constraints foreignKeyName="fk_photos_session" referencedTableName="sessions" referencedColumnNames="session_id"/>
-        </column>
-        <column name="customer_id" type="BIGINT">
-            <constraints foreignKeyName="fk_photos_customers" referencedTableName="customers" referencedColumnNames="customer_id"/>
-        </column>
-    </createTable>
-    <createIndex tableName="photos" indexName="idx_photos_session_id">
-        <column name="session_id"></column>
-    </createIndex>
-    <createIndex tableName="photos" indexName="idx_photos_customer_id">
-        <column name="customer_id"></column>
-    </createIndex>
+<changeSet id="create users table" author="krzpob@gmail.com">
+<createTable tableName="user">
+    <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true" /></column>
+    <column name="email" type="VARCHAR(255)"><constraints unique="true" nullable="false" /></column>
+    <column name="password" type="VARCHAR(1024)"><constraints nullable="false" /></column>
+    <column name="role" type="VARCHAR(32)"><constraints nullable="false" /></column>
+</createTable>
+
 </changeSet>
 </databaseChangeLog>

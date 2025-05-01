@@ -1,4 +1,4 @@
-package pl.com.javasoft.mobile_gallery.domain.service;
+package pl.com.javasoft.mobile_gallery.infrastructure.config;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
-import pl.com.javasoft.mobile_gallery.domain.model.User;
-import pl.com.javasoft.mobile_gallery.domain.repository.UserRepository;
+import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.User;
+import pl.com.javasoft.mobile_gallery.infrastructure.persistence.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

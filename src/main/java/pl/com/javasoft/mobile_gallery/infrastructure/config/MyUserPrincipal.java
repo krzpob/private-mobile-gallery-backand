@@ -1,11 +1,12 @@
-package pl.com.javasoft.mobile_gallery.domain.service;
+package pl.com.javasoft.mobile_gallery.infrastructure.config;
 
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import pl.com.javasoft.mobile_gallery.domain.model.User;
+import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.User;
+
 
 public class MyUserPrincipal implements UserDetails{
     private User user;
