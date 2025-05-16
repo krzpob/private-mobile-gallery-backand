@@ -9,16 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.com.javasoft.mobile_gallery.domain.model.AccessGrant;
-import pl.com.javasoft.mobile_gallery.domain.model.Photo;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "galleries")
 public class GalleryEntity {
 
     @Id
@@ -28,13 +28,12 @@ public class GalleryEntity {
     private String name;
 
     @ManyToOne
+    @JoinColumn
     private PhotographerEntity owner;
 
-    @OneToMany
-    @JoinColumn
+    @OneToMany(mappedBy = "gallery")
     private List<PhotoEntity> photos;
     
     @OneToMany(mappedBy = "gallery")
-    @JoinColumn
     private List<AccessGrantEntity> accessGrants;
 }

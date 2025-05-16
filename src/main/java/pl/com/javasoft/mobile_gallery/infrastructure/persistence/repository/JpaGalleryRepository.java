@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.GalleryEntity;
 
 public interface JpaGalleryRepository extends JpaRepository<GalleryEntity, Long> {
-    List<GalleryEntity> findByPhotographerId(Long photographerId);
+    List<GalleryEntity> findByOwner_Id(Long photographerId);
 }

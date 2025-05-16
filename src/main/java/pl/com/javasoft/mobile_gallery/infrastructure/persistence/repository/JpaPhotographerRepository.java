@@ -9,6 +9,6 @@ import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.Photogra
 public interface JpaPhotographerRepository extends JpaRepository<PhotographerEntity, Long> {
     Optional<PhotographerEntity> findByEmail(String email);
 
-    Optional<PhotographerEntity> findById(String id);
+    Optional<PhotographerEntity> findById(Long id);
     
 }

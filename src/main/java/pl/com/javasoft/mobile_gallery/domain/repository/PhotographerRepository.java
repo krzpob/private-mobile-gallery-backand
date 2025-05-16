@@ -6,7 +6,7 @@ import pl.com.javasoft.mobile_gallery.domain.model.Photographer;
 
 @Repository
 public interface PhotographerRepository {
-    void save(Photographer photographer);
+    Long save(Photographer photographer);
 
     Photographer findByEmail(String email);
 

@@ -25,7 +25,7 @@ public class GalleryRepositoryImpl implements GalleryRepository{
 
     @Override
     public List<Gallery> findByPhotographerId(Long photographerId) {
-        return jpaGalleryRepository.findByPhotographerId(photographerId).stream()
+        return jpaGalleryRepository.findByOwner_Id(photographerId).stream()
                 .map(GalleryMapper::mapToDomain)
                 .collect(Collectors.toList());
     }

@@ -8,10 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "clients")
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientEntity {
@@ -21,6 +23,5 @@ public class ClientEntity {
     Long id;
     String email;
     @OneToMany(mappedBy = "client")
-    @JoinColumn
     List<AccessGrantEntity> accessGrants;
 }

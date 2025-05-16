@@ -13,4 +13,5 @@ public class Gallery {
     private Photographer owner;
     List<Photo> photos;
     List<AccessGrant> accessGrants;
+    
 }

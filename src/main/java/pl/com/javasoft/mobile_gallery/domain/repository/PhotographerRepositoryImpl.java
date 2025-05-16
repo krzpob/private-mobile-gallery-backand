@@ -15,8 +15,9 @@ public class PhotographerRepositoryImpl implements PhotographerRepository {
     private final JpaPhotographerRepository jpaPhotographerRepository;
 
     @Override
-    public void save(Photographer photographer) {
-        jpaPhotographerRepository.save(PhotographerMapper.mapToEntity(photographer));
+    public Long save(Photographer photographer) {
+        var entity = jpaPhotographerRepository.saveAndFlush(PhotographerMapper.mapToEntity(photographer));
+        return entity.getId();
     }
 
     @Override

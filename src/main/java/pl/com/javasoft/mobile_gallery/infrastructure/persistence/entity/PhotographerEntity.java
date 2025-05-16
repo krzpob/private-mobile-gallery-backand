@@ -7,14 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.Builder;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Table(name = "photographers")
 @NoArgsConstructor
 public class PhotographerEntity {
     
@@ -25,8 +25,7 @@ public class PhotographerEntity {
     private String email;
     private String name;
 
-    @ManyToOne
-    @JoinColumn
+    @OneToMany(mappedBy = "owner")
     private List<GalleryEntity> galleries = new ArrayList<>();
 
     public PhotographerEntity(Long id,String email,String  name){

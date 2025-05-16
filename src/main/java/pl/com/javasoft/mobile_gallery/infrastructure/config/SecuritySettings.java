@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,7 +22,15 @@ public class SecuritySettings {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(request -> request.anyRequest()
+        http.authorizeHttpRequests(request ->             
+                request
+                .requestMatchers("/authentication").permitAll()
+                .requestMatchers("/api/v1/photographer/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/v1/gallery/**").hasRole("PHOTOGRAPHER")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/gallery/**").hasRole("PHOTOGRAPHER")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/gallery/**").hasRole("PHOTOGRAPHER")
+                .requestMatchers(HttpMethod.GET, "/api/v1/gallery/**").hasAnyRole("PHOTOGRAPHER", "CLIENT")
+                .anyRequest()
                 .authenticated())                
             .httpBasic(Customizer.withDefaults())
             .csrf(csrf->csrf.disable());
