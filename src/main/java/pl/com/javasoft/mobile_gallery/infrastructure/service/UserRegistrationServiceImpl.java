@@ -1,4 +1,4 @@
-package pl.com.javasoft.mobile_gallery.infrastructure.security;
+package pl.com.javasoft.mobile_gallery.infrastructure.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
