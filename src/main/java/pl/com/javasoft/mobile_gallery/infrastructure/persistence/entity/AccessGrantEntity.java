@@ -32,4 +32,11 @@ public class AccessGrantEntity {
     private GalleryEntity gallery;
     private LocalDateTime grantedAt;
     private boolean canDownload;
+
+    public AccessGrantEntity(Long id, GalleryEntity galleryEntity, boolean canDownload) {
+        this.id = id;
+        this.gallery = galleryEntity; // Assuming GalleryEntity has a constructor that accepts an ID
+        this.canDownload = canDownload;
+        this.grantedAt = LocalDateTime.now(); // Default to now, can be overridden if needed
+    }
 }

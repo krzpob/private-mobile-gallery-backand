@@ -7,5 +7,5 @@ import pl.com.javasoft.mobile_gallery.domain.model.Client;
 public interface ClientRepository {
     Optional<Client> findByEmail(String email);
     Client save(Client client);
-
+    Optional<Client> findById(Long id);
 }

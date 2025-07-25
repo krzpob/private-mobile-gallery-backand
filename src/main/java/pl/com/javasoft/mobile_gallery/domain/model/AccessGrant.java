@@ -9,7 +9,6 @@ import lombok.Getter;
 @Builder
 public class AccessGrant {
     private Long id;
-    private Client client;
     private Gallery gallery;
     private LocalDateTime grantedAt;
     private boolean canDownload;

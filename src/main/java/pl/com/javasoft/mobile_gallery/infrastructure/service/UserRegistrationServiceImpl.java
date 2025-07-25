@@ -1,12 +1,14 @@
 package pl.com.javasoft.mobile_gallery.infrastructure.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import pl.com.javasoft.mobile_gallery.domain.service.UserRegistrationService;
 import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.User;
 import pl.com.javasoft.mobile_gallery.infrastructure.persistence.repository.UserRepository;
 
+@Service
 @RequiredArgsConstructor
 public class UserRegistrationServiceImpl implements UserRegistrationService {
 
