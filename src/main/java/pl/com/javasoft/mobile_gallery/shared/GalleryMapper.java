@@ -11,7 +11,7 @@ public class GalleryMapper {
             .id(entity.getId())
             .name(entity.getName())
             .owner(PhotographerMapper.mapToDomain(entity.getOwner()))
-            .photos(null) // TODO: map photos
+            .photos(null)
             .build();
     }
 

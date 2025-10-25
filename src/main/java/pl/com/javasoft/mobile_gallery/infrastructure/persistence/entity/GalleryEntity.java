@@ -35,5 +35,5 @@ public class GalleryEntity {
     private List<PhotoEntity> photos;
     
     @OneToMany(mappedBy = "gallery")
-    private List<AccessGrantEntity> accessGrants;
+    private List<ClientEntity> clients;
 }

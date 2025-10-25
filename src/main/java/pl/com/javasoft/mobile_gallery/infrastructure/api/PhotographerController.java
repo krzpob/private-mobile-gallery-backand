@@ -1,4 +1,4 @@
-package pl.com.javasoft.mobile_gallery.infrastructure.web;
+package pl.com.javasoft.mobile_gallery.infrastructure.api;
 
 import java.util.Map;
 

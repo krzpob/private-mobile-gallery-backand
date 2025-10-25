@@ -9,7 +9,6 @@ import pl.com.javasoft.mobile_gallery.domain.model.AccessGrant;
 import pl.com.javasoft.mobile_gallery.domain.model.Client;
 import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.ClientEntity;
 import pl.com.javasoft.mobile_gallery.infrastructure.persistence.repository.JpaClientEntityRepository;
-import pl.com.javasoft.mobile_gallery.infrastructure.persistence.repository.UserRepository;
 import pl.com.javasoft.mobile_gallery.shared.ClientMapper;
 import pl.com.javasoft.mobile_gallery.shared.GalleryMapper;
 import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.AccessGrantEntity;
@@ -20,7 +19,6 @@ import pl.com.javasoft.mobile_gallery.infrastructure.persistence.entity.AccessGr
 public class ClientRepositoryImpl implements ClientRepository {
 
     private final JpaClientEntityRepository jpaClientEntityRepository;
-    private final UserRepository userRepository;
     
     @Override
     public Optional<Client> findByEmail(String email) {
