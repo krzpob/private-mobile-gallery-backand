@@ -2,6 +2,7 @@ package pl.com.javasoft.mobile_gallery.infrastructure.api;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ public class PhotographerController {
         this.dispatchableHandler = dispatchableHandler;
     }
 
+    @PostMapping()
     public Map<String, String> registerPhotographer(RegisterPhotographerCommand registerPhotographerCommand) {
         Long photographerId = dispatchableHandler.dispatch(registerPhotographerCommand);
         if (photographerId == null) {
